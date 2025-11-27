@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.List;\nimport java.util.Map;
 
 @RestController
 @RequestMapping("/cart")
@@ -55,7 +55,7 @@ public class CartController {
         return ResponseEntity.ok(cartService.getOrders(userId));
     }
 
-    @GetMapping("/orders")
+    @PutMapping("/orders/{orderId}/status")\n    public ResponseEntity<Order> updateOrderStatus(@PathVariable Long orderId, @RequestBody Map<String, String> request) {\n        String newStatus = request.get("status");\n        return ResponseEntity.ok(cartService.updateOrderStatus(orderId, newStatus));\n    }\n\n    @GetMapping("/orders")
     public ResponseEntity<List<Order>> getAllOrders() {
         return ResponseEntity.ok(cartService.getAllOrders());
     }
