@@ -29,7 +29,7 @@ public class AuthService {
         if (userOpt.isPresent()) {
             UserDto user = userOpt.get();
             if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-                String token = jwtProvider.createTokenWithUserInfo(user.getEmail(), user.getRole(), user.getId(), user.getNombre(), user.getTelefono(), user.getRegion(), user.getComuna(), user.getPassword());
+                String token = jwtProvider.createTokenWithUserInfo(user.getEmail(), user.getRole(), user.getId(), user.getNombre(), user.getTelefono(), user.getRegion(), user.getComuna());
                 return new AuthResponse(token);
             }
         }
@@ -60,7 +60,7 @@ public class AuthService {
                 .build();
 
         UserDto savedUser = userClient.save(userDto);
-        String token = jwtProvider.createTokenWithUserInfo(savedUser.getEmail(), savedUser.getRole(), savedUser.getId(), savedUser.getNombre(), savedUser.getTelefono(), savedUser.getRegion(), savedUser.getComuna(), savedUser.getPassword());
+        String token = jwtProvider.createTokenWithUserInfo(savedUser.getEmail(), savedUser.getRole(), savedUser.getId(), savedUser.getNombre(), savedUser.getTelefono(), savedUser.getRegion(), savedUser.getComuna());
         return new AuthResponse(token);
     }
 
