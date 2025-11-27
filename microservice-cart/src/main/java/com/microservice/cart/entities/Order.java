@@ -24,7 +24,10 @@ public class Order {
 
     private Long userId;
     private LocalDateTime date;
-    private Double total;\n\n    @Column(name = "status")\n    private String status = "PENDING"; // PENDING, RECEIVED, IN_PREPARATION, COMPLETED
+    private Double total;
+
+    @Column(name = "status")
+    private String status = "PENDING"; // PENDING, RECEIVED, IN_PREPARATION, COMPLETED
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderDetail> details = new ArrayList<>();

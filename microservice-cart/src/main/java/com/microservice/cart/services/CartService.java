@@ -115,11 +115,19 @@ public class CartService {
         return savedOrder;
     }
 
+    @Transactional
+    public Order updateOrderStatus(Long orderId, String newStatus) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+        order.setStatus(newStatus);
+        return orderRepository.save(order);
+    }
+
     public List<Order> getOrders(Long userId) {
         return orderRepository.findByUserId(userId);
     }
 
-    @Transactional\n    public Order updateOrderStatus(Long orderId, String newStatus) {\n        Order order = orderRepository.findById(orderId)\n                .orElseThrow(() -> new RuntimeException("Order not found"));\n        order.setStatus(newStatus);\n        return orderRepository.save(order);\n    }\n\n    public List<Order> getAllOrders() {
+    public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
 
